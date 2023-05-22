@@ -14,16 +14,6 @@ void inputBaggageInfo(Baggage& baggage) {
     std::cin >> baggage.totalWeight;
 }
 
-// Функція для порівняння двох багажів за кількістю речей
-bool compareByNumberOfItems(const Baggage& baggage1, const Baggage& baggage2) {
-    return baggage1.numberOfItems > baggage2.numberOfItems;
-}
-
-// Функція для порівняння двох багажів за вагою
-bool compareByWeight(const Baggage& baggage1, const Baggage& baggage2) {
-    return baggage1.totalWeight > baggage2.totalWeight;
-}
-
 int main() {
     int N;
     std::cout << "Введіть кількість пасажирів: ";
@@ -37,24 +27,25 @@ int main() {
         inputBaggageInfo(passengers[i]);
     }
 
-    // Пошук пасажира з найбільшим багажем за кількістю речей
-    int maxItemsIndex = 0;
+    int maxItemsIndex = 0; // Індекс пасажира з найбільшим багажем за кількістю речей
+    int maxWeightIndex = 0; // Індекс пасажира з найбільшим багажем за вагою
+
+    // Пошук пасажира з найбільшим багажем за кількістю речей і за вагою
     for (int i = 1; i < N; i++) {
-        if (compareByNumberOfItems(passengers[i], passengers[maxItemsIndex])) {
+        if (passengers[i].numberOfItems > passengers[maxItemsIndex].numberOfItems) {
             maxItemsIndex = i;
         }
-    }
 
-    // Пошук пасажира з найбільшим багажем за вагою
-    int maxWeightIndex = 0;
-    for (int i = 1; i < N; i++) {
-        if (compareByWeight(passengers[i], passengers[maxWeightIndex])) {
+        if (passengers[i].totalWeight > passengers[maxWeightIndex].totalWeight) {
             maxWeightIndex = i;
         }
     }
 
-    std::cout << "Пасажир з найбільшим багажем за кількістю речей: #" << maxItemsIndex + 1 << std::endl;
-    std::cout << "Пасажир з найбільшим багажем за вагою: #" << maxWeightIndex + 1 << std::endl;
+    if (maxItemsIndex == maxWeightIndex) {
+        std::cout << "Пасажир з найбільшим багажем за кількістю речей і вагою: #" << maxItemsIndex + 1 << std::endl;
+    } else {
+        std::cout << "Пасажира з найбільшим багажем водночас і за кількістю речей і за вагою немає." << std::endl;
+    }
 
     delete[] passengers;
     return 0;
