@@ -11,11 +11,11 @@ struct ABIT {
 
 void inputABIT(ABIT& abit) {
     std::cout << "Введіть прізвище та ініціали вступника: ";
-    std::cin >> abit.NAME;
+    std::getline(std::cin >> std::ws, abit.NAME);
     std::cout << "Введіть гендер: ";
-    std::cin >> abit.GENDER;
+    std::getline(std::cin >> std::ws, abit.GENDER);
     std::cout << "Введіть спеціальність: ";
-    std::cin >> abit.SPEC;
+    std::getline(std::cin >> std::ws, abit.SPEC);
     std::cout << "Введіть результати екзаменів (три результати через пробіл): ";
     for (int i = 0; i < 3; i++) {
         std::cin >> abit.EXAM[i];
